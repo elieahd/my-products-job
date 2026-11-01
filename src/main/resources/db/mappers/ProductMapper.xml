@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myp.jobs.infrastructure.outbound.database.mappers.ProductMapper">
+
+    <insert id="createAll" parameterType="java.util.List">
+        INSERT INTO product (name, description, price, created_at, category_id, active)
+        VALUES
+        <foreach collection="list" item="product" separator=",">
+            (
+            #{product.name},
+            #{product.description},
+            #{product.price},
+            #{product.createdAt},
+            #{product.category.id},
+            #{product.active}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

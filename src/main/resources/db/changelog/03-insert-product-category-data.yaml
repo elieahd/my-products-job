@@ -1,0 +1,193 @@
+databaseChangeLog:
+  - changeSet:
+      id: 03-insert-product-category-data
+      author: elieahd
+      changes:
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: ELECTRONICS
+              - column:
+                  name: description
+                  value: Electronic devices and accessories
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: BOOKS
+              - column:
+                  name: description
+                  value: Books and publications
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: CLOTHING
+              - column:
+                  name: description
+                  value: Apparel and fashion
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: HOME
+              - column:
+                  name: description
+                  value: Home and kitchen essentials
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: TOYS
+              - column:
+                  name: description
+                  value: Toys and games for all ages
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: SPORTS
+              - column:
+                  name: description
+                  value: Sports equipment and outdoor gear
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: BEAUTY
+              - column:
+                  name: description
+                  value: Beauty and personal care products
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: GROCERY
+              - column:
+                  name: description
+                  value: Food, beverages and pantry staples
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: AUTOMOTIVE
+              - column:
+                  name: description
+                  value: Car parts, accessories and maintenance
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: HEALTH
+              - column:
+                  name: description
+                  value: Health, wellness and nutrition
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: GARDEN
+              - column:
+                  name: description
+                  value: Garden, lawn and outdoor living
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: PET_SUPPLIES
+              - column:
+                  name: description
+                  value: Food and accessories for pets
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: OFFICE
+              - column:
+                  name: description
+                  value: Office and school supplies
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: MUSIC
+              - column:
+                  name: description
+                  value: Musical instruments and audio gear
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: MOVIES
+              - column:
+                  name: description
+                  value: Movies and TV series
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: VIDEO_GAMES
+              - column:
+                  name: description
+                  value: Video games and consoles
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: JEWELRY
+              - column:
+                  name: description
+                  value: Jewelry and watches
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: BABY
+              - column:
+                  name: description
+                  value: Baby products and nursery essentials
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: TOOLS
+              - column:
+                  name: description
+                  value: Tools and home improvement
+        - insert:
+            tableName: product_category
+            columns:
+              - column:
+                  name: code
+                  value: FOOTWEAR
+              - column:
+                  name: description
+                  value: Shoes, sandals and boots
+      rollback:
+        - delete:
+            tableName: product_category
+            where: >-
+              code IN ('ELECTRONICS', 'BOOKS', 'CLOTHING', 'HOME', 'TOYS',
+              'SPORTS', 'BEAUTY', 'GROCERY', 'AUTOMOTIVE', 'HEALTH', 'GARDEN',
+              'PET_SUPPLIES', 'OFFICE', 'MUSIC', 'MOVIES', 'VIDEO_GAMES',
+              'JEWELRY', 'BABY', 'TOOLS', 'FOOTWEAR')
