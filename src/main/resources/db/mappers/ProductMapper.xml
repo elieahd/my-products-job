@@ -17,4 +17,24 @@
         </foreach>
     </insert>
 
+    <resultMap id="productCsvMap" type="com.myp.jobs.domain.services.jobs.load.csv.ProductCsv">
+        <constructor>
+            <arg column="name" javaType="java.lang.String"/>
+            <arg column="description" javaType="java.lang.String"/>
+            <arg column="price" javaType="java.math.BigDecimal"/>
+            <arg column="category" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+
+    <select id="findPage" resultMap="productCsvMap">
+        SELECT product.name,
+               product.description,
+               product.price,
+               product_category.code AS category
+        FROM product
+        JOIN product_category ON product_category.id = product.category_id
+        ORDER BY product.id
+        LIMIT #{_pagesize} OFFSET #{_skiprows}
+    </select>
+
 </mapper>

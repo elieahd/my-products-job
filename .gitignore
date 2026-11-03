@@ -21,3 +21,5 @@ target/
 .DS_STORE
 
 .env
+
+output/*
