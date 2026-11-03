@@ -53,7 +53,7 @@ The query **must** have a deterministic `ORDER BY`, otherwise pages can overlap 
         <constructor>
             <arg column="name" javaType="java.lang.String"/>
             <arg column="description" javaType="java.lang.String"/>
-            <arg column="price" javaType="java.lang.Long"/>
+            <arg column="price" javaType="java.math.BigDecimal"/>
             <arg column="category" javaType="java.lang.String"/>
         </constructor>
     </resultMap>
@@ -108,7 +108,8 @@ page), write them, and commit one transaction.
 
 @Configuration
 public class ExportProductJob {
-    private final Integer PAGE_SIZE = 10000;
+
+    private static final int PAGE_SIZE = 10_000;
 
     @Bean
     public Job exportProducts(JobRepository jobRepository,
@@ -150,7 +151,7 @@ public class ExportProductJob {
 ```sql
 SELECT ji.job_name, je.*
 FROM batch_job_execution je
-         JOIN batch_job_instance ji ON ji.job_instance_id = je.job_instance_id
+JOIN batch_job_instance ji ON ji.job_instance_id = je.job_instance_id
 WHERE ji.job_name = 'exportProducts'
 ORDER BY je.job_execution_id DESC;
 ```

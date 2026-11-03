@@ -9,7 +9,7 @@ It is a plain data holder with no business logic.
 ```java
 public record ProductCsv(String name,
                          String description,
-                         Long price,
+                         BigDecimal price,
                          String category) {
 }
 ```
@@ -46,7 +46,7 @@ reaches the writer.
 
 @Component
 public class ProductItemProcessor implements ItemProcessor<ProductCsv, Product> {
-    private final Logger log = LoggerFactory.getLogger(ProductItemProcessor.class);
+    private static final Logger log = LoggerFactory.getLogger(ProductItemProcessor.class);
 
     private final ProductCategoryInventory categoryInventory;
 
@@ -66,7 +66,12 @@ public class ProductItemProcessor implements ItemProcessor<ProductCsv, Product> 
             return null;
         }
 
-        if (item.price() = null || item.price() < 0) {
+        if (item.price() == null) {
+            log.warn("[Processor] [Skipping] Product price is null");
+            return null;
+        }
+
+        if (item.price().signum() < 0) {
             log.warn("[Processor] [Skipping] Product price is negative");
             return null;
         }
@@ -76,7 +81,8 @@ public class ProductItemProcessor implements ItemProcessor<ProductCsv, Product> 
             return null;
         }
 
-        Optional<ProductCategory> productCategory = categoryInventory.findByKey(item.category());
+        Optional<ProductCategory> productCategory = categoryInventory.findByCode(item.category());
+
         if (productCategory.isEmpty()) {
             log.warn("[Processor] [Skipping] Product Category %s is not found".formatted(item.category()));
             return null;
@@ -100,7 +106,7 @@ The writer receives a whole chunk and persists it in one go
 
 @Component
 public class ProductItemWriter implements ItemWriter<Product> {
-    private final Logger log = LoggerFactory.getLogger(ProductItemWriter.class);
+    private static final Logger log = LoggerFactory.getLogger(ProductItemWriter.class);
     private final ProductInventory productInventory;
 
     public ProductItemWriter(ProductInventory productInventory) {
